@@ -1,0 +1,63 @@
+# serverless.yml
+
+service: airbus
+
+# name and configuration of the provider (aws, azure, gcp, etc.)
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-1
+  profile: rekognition
+  environment:
+    RDS_DATABASE: ${file(./config.json):RDS_DATABASE}
+    RDS_ENDPOINT: ${file(./config.json):RDS_ENDPOINT}
+    RDS_PASSWORD: ${file(./config.json):RDS_PASSWORD}
+    RDS_USERNAME: ${file(./config.json):RDS_USERNAME}
+
+# while packaging this function which files to include or exclude
+package:
+  exclude:
+    - ./*.zip
+    - ./nodejs/**
+    - ./node_modules/**
+    - ./config.json
+
+# for offline development
+plugins:
+  - serverless-offline
+
+# lambda function configuration
+functions:
+  # fetches news feed from the backend
+  newsfeed:
+    handler: newsfeed.handler
+    events:
+      - http:
+          path: /newsfeed
+          method: GET
+          cors: true
+    layers:
+      - arn:(lambda-layer-comes-here)
+  
+  # adds a flight to the database
+  addFlight:
+    handler: addFlight.handler
+    events:
+      - http:
+          path: /add-flight
+          method: POST
+          cors: true
+    layers:
+      - arn:(lambda-layer-comes-here)
+
+  # fetches the matching flights from the database
+  searchFlights:
+    handler: searchFlights.handler
+    events:
+      - http:
+          path: /search-flights
+          method: GET
+          cors: true
+    layers:
+      - arn:(lambda-layer-comes-here)

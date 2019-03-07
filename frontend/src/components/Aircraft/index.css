@@ -1,0 +1,86 @@
+.a330-container {
+  height: calc(100vh - 100px - 50px);
+  width: 100%;
+  padding-top: 50px;
+  text-align: left;
+  overflow-y: scroll;
+}
+
+.a330-container > div:first-child {
+  background-color: white;
+  opacity: 0.8;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+  padding: 20px;
+}
+
+.input-rows {
+  display: flex;
+  justify-content: space-around;
+}
+
+.search {
+  display: flex;
+  justify-content: space-around;
+}
+
+.action-buttons {
+  text-align: left;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+}
+
+.msn-container {
+  width: 40%;
+  background-color: white;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+  border-radius: 5px;
+  margin: 0% 5%;
+  text-align: left;
+  opacity: 0.8;
+
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.msn-container > div {
+  padding: 10px;
+}
+
+.msn-container .title {
+  color: #3f3f3f;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1.2px;
+}
+
+.msn-container .description {
+  color: #7f7f7f;
+  /* font-weight: 700; */
+  font-size: 16px;
+  margin-top: 20px;
+  line-height: 22px;
+}
+
+.msn-container .date {
+  margin-top: 10px;
+  color: #3f3f3f;
+  align-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 600;
+}
+
+/* for mobile screen */
+@media (min-width: 320px) and (max-width: 480px) {
+  .msn-container {
+    width: 80%;
+    margin: 0 10%;
+  }
+}
